@@ -3,7 +3,7 @@ const zod = require("zod");
 const router = express.Router();
 const { User, Account } = require("../model/user.model");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../config");
+const { JWT_SECRET } = require("../config");
 const authMiddleware = require("../middlewares/auth.middleware");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -117,7 +117,7 @@ const updateUserSchema = zod.object({
 router.put("/update", authMiddleware, async (req, res) => {
   try {
     const body = req.body;
-    const { success } = updateUserSchema.safeParse(body);
+    const { success, data } = updateUserSchema.safeParse(body);
     if (!success) {
       return res.status(400).json({ message: "Input invalid" });
     }
@@ -125,7 +125,14 @@ router.put("/update", authMiddleware, async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    const updatedUser = await User.findByIdAndUpdate(req.userId, body, {
+
+    //if password is provided , hash it before updating
+    if (data.password) {
+      const hashedPassword = await bcrypt.hash(data.password, 10);
+      data.password = hashedPassword;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.userId, data, {
       new: true,
     });
     res.status(200).json({
