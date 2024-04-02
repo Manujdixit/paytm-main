@@ -1,8 +1,8 @@
 const express = require("express");
-const mainRouter = require("./routes/index.js");
+const mainRouter = require("./routes/index");
 const app = express();
-const db = require("./db.js");
-const PORT = 4000;
+const db = require("./db");
+const PORT = 4001;
 const cors = require("cors");
 
 app.use(cors());
@@ -10,7 +10,7 @@ app.use(express.json());
 
 db();
 
-app.use("api/v/user", mainRouter);
+app.use("/api/v1", mainRouter);
 
 app.listen(PORT, () => {
   console.log(`listening at ${PORT}`);
