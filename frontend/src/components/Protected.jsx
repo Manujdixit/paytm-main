@@ -7,10 +7,10 @@ function Protected(props) {
   useEffect(() => {
     let login = localStorage.getItem("token");
     if (!login) {
-      navigate("/signin");
+      navigate("/");
     }
     if (login) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, []);
 

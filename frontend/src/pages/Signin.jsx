@@ -17,12 +17,12 @@ function Signin() {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post(`${BASE_URL}/user/signin`, {
+      const response = await axios.post(`${BASE_URL}/user/`, {
         password,
         username,
       });
       localStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate("/dashboard");
       toast.success("Signed in successfully");
     } catch (error) {
       toast.error("Failed to sign in. Please check credentials.");

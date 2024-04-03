@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
   const amount = location.state && location.state.amount; // Check if location.state exists before accessing amount
 
   const handleGoBack = () => {
-    navigate("/"); // Navigate back to the dashboard route
+    navigate("/dashboard"); // Navigate back to the dashboard route
   };
 
   return (

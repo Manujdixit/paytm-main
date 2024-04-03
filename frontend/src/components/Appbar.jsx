@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Appbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -12,14 +13,15 @@ export const Appbar = () => {
   const handleLogoutClick = () => {
     // Handle logout click action
     localStorage.removeItem("token");
-    navigate("/signin");
+    navigate("/");
     console.log("Logout clicked");
+    toast.success("Logout successful");
   };
 
   return (
     <div className="shadow h-14 flex justify-between">
       <div className="flex flex-col justify-center h-full ml-4">
-        <a href="/">Payzz app</a>
+        <a href="/dashboard">Payzz app</a>
       </div>
       <div className="flex">
         <div className="flex flex-col justify-center h-full mr-4">Hello</div>

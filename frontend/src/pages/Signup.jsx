@@ -29,7 +29,7 @@ export default function Signup() {
       console.log("Signup successful. Response:", response.data);
       toast.success("Signup Successful");
       localStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Failed to sign up. Please check credentials.");
     }
@@ -75,7 +75,7 @@ export default function Signup() {
           <BottomWarning
             label={"Already have an account?"}
             buttonText={"Sign in"}
-            to={"/signin"}
+            to={"/"}
           />
         </div>
       </div>

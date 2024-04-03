@@ -12,8 +12,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<Protected Component={Signup} />} />
-          <Route path="/signin" element={<Protected Component={Signin} />} />
-          <Route path="/" element={<Protected Component={Dashboard} />} />
+          <Route path="/" element={<Protected Component={Signin} />} />
+          <Route
+            path="/dashboard"
+            element={<Protected Component={Dashboard} />}
+          />
           <Route path="send" element={<Sendmoney />} />
           <Route path="paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
