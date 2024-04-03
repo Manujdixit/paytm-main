@@ -8,6 +8,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function Signup() {
   const [firstName, setfirstName] = useState();
   const [lastName, setlastName] = useState();
@@ -52,15 +54,12 @@ export default function Signup() {
           <div className="pt-4">
             <Button
               onClick={async () => {
-                const response = await axios.post(
-                  "http://localhost:4001/api/v1/user/signup",
-                  {
-                    firstName,
-                    lastName,
-                    username,
-                    password,
-                  }
-                );
+                const response = await axios.post(`${BASE_URL}/user/signup`, {
+                  firstName,
+                  lastName,
+                  username,
+                  password,
+                });
                 console.log("Signup successful. Response:", response.data);
 
                 localStorage.setItem("token", response.data.token);

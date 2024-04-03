@@ -3,6 +3,8 @@ import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export const Users = () => {
   // Replace with backend call
   const [users, setUsers] = useState([]);
@@ -11,7 +13,7 @@ export const Users = () => {
   useEffect(() => {
     console.log("Fetching users with filter:", filter);
     axios
-      .get("http://localhost:4001/api/v1/user/bulk?filter=" + filter)
+      .get(`${BASE_URL}/user/bulk?filter=` + filter)
       .then((response) => {
         console.log("Response data:", response.data); // Log the entire response data to inspect its structure
         const userData = response.data; // Update to access the correct property

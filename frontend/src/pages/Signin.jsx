@@ -7,6 +7,8 @@ import { Button } from "../components/Button";
 import { BottomWarning } from "../components/BottomWarning";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Signin() {
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
@@ -34,13 +36,10 @@ function Signin() {
           <div className="pt-4">
             <Button
               onClick={async () => {
-                const response = await axios.post(
-                  "http://localhost:4001/api/v1/user/signin",
-                  {
-                    password,
-                    username,
-                  }
-                );
+                const response = await axios.post(`${BASE_URL}/user/signin`, {
+                  password,
+                  username,
+                });
                 localStorage.setItem("token", response.data.token);
                 navigate("/dashboard");
               }}

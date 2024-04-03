@@ -2,6 +2,8 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const SendMoney = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -12,7 +14,7 @@ const SendMoney = () => {
   const initiateTransfer = async () => {
     try {
       await axios.post(
-        "http://localhost:4001/api/v1/account/transfer",
+        `${BASE_URL}/account/transfer`,
         {
           to: id,
           amount,
