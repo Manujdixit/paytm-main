@@ -23,6 +23,7 @@ function Signin() {
       });
       localStorage.setItem("token", response.data.token);
       navigate("/");
+      toast.success("Signed in successfully");
     } catch (error) {
       toast.error("Failed to sign in. Please check credentials.");
     }

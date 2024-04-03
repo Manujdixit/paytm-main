@@ -27,7 +27,7 @@ export default function Signup() {
         password,
       });
       console.log("Signup successful. Response:", response.data);
-      toast("Signup Successful");
+      toast.success("Signup Successful");
       localStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (error) {
