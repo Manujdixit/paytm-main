@@ -12,7 +12,7 @@ function Protected(props) {
     if (login) {
       navigate("/dashboard");
     }
-  });
+  }, []);
 
   return (
     <>
