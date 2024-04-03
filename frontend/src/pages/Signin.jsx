@@ -41,7 +41,7 @@ function Signin() {
                   username,
                 });
                 localStorage.setItem("token", response.data.token);
-                navigate("/dashboard");
+                navigate("/");
               }}
               label={"Sign in"}
             />
