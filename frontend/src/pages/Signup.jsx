@@ -7,6 +7,7 @@ import { BottomWarning } from "../components/BottomWarning";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -16,6 +17,23 @@ export default function Signup() {
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
   const navigate = useNavigate();
+
+  const onclickhandler = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/user/signup`, {
+        firstName,
+        lastName,
+        username,
+        password,
+      });
+      console.log("Signup successful. Response:", response.data);
+      toast("Signup Successful");
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (error) {
+      toast.error("Failed to sign up. Please check credentials.");
+    }
+  };
 
   return (
     <div className="bg-slate-300 h-screen flex justify-center">
@@ -52,21 +70,7 @@ export default function Signup() {
             label={"Password"}
           />
           <div className="pt-4">
-            <Button
-              onClick={async () => {
-                const response = await axios.post(`${BASE_URL}/user/signup`, {
-                  firstName,
-                  lastName,
-                  username,
-                  password,
-                });
-                console.log("Signup successful. Response:", response.data);
-
-                localStorage.setItem("token", response.data.token);
-                navigate("/");
-              }}
-              label={"Sign up"}
-            />
+            <Button onClick={onclickhandler} label={"Sign up"} />
           </div>
           <BottomWarning
             label={"Already have an account?"}

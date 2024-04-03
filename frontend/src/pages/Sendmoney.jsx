@@ -2,6 +2,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { Appbar } from "../components/Appbar";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -29,9 +30,12 @@ const SendMoney = () => {
       // If the axios request is successful, redirect to success page
       console.log("Amount before navigation:", amount); // Log the amount before navigation
       navigate("/paymentsuccess", { state: { amount } }); // Pass amount as state object
+
+      toast.success("Transfer initiated successfully!");
     } catch (error) {
       // Handle error
       console.error("Error occurred:", error);
+      toast.error("Error occurred while initiating transfer");
     }
   };
 

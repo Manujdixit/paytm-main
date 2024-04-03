@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { Balance } from "../components/Balance";
 import { Users } from "../components/Users";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 console.log("BASE_URL", BASE_URL);
@@ -23,6 +24,7 @@ const Dashboard = () => {
         setbalance(response.data.balance);
       } catch (error) {
         console.log("error fetching balance", error);
+        toast.error("Error fetching balance");
       }
     };
 

@@ -6,6 +6,7 @@ import { InputBox } from "../components/InputBox";
 import { Button } from "../components/Button";
 import { BottomWarning } from "../components/BottomWarning";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -13,6 +14,20 @@ function Signin() {
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
   const navigate = useNavigate();
+
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/user/signin`, {
+        password,
+        username,
+      });
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (error) {
+      toast.error("Failed to sign in. Please check credentials.");
+    }
+  };
+
   return (
     <div className="bg-slate-300 h-screen flex justify-center">
       <div className="flex flex-col justify-center">
@@ -34,17 +49,7 @@ function Signin() {
             label={"Password"}
           />
           <div className="pt-4">
-            <Button
-              onClick={async () => {
-                const response = await axios.post(`${BASE_URL}/user/signin`, {
-                  password,
-                  username,
-                });
-                localStorage.setItem("token", response.data.token);
-                navigate("/");
-              }}
-              label={"Sign in"}
-            />
+            <Button onClick={handleSignIn} label={"Sign in"} />
           </div>
           <BottomWarning
             label={"Don't have an account?"}
