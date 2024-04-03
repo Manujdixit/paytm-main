@@ -4,15 +4,19 @@ import Sendmoney from "./pages/Sendmoney";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import Protected from "./components/Protected";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/signup" element={<Protected Component={Signup} />} />
+          <Route path="/signin" element={<Protected Component={Signin} />} />
+          <Route
+            path="/dashboard"
+            element={<Protected Component={Dashboard} />}
+          />
           <Route path="send" element={<Sendmoney />} />
           <Route path="paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
