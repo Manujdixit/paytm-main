@@ -63,7 +63,7 @@ export default function Signup() {
                 console.log("Signup successful. Response:", response.data);
 
                 localStorage.setItem("token", response.data.token);
-                navigate("/dashboard");
+                navigate("/");
               }}
               label={"Sign up"}
             />

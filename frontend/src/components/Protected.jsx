@@ -10,7 +10,7 @@ function Protected(props) {
       navigate("/signin");
     }
     if (login) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, []);
 
