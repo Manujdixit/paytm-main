@@ -24,7 +24,7 @@ const { JWT_SECRET } = require("../config.js");
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.log("Unauthorized: No Bearer token found in headers");
+    // console.log("Unauthorized: No Bearer token found in headers");
     return res.status(403).json({ message: "Unauthorized" });
   }
 
@@ -32,7 +32,7 @@ const authMiddleware = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.userId = decoded.userId;
-    console.log("User authenticated. User ID:", req.userId);
+    // console.log("User authenticated. User ID:", req.userId);
     next();
   } catch (error) {
     console.error("Error verifying token:", error.message);

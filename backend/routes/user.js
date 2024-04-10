@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
   try {
     const { success, error } = signupSchema.safeParse(req.body);
 
-    console.log("validation result:", success, error);
+    // console.log("validation result:", success, error);
 
     if (!success) {
       return res
@@ -74,10 +74,10 @@ const signinBody = zod.object({
   password: zod.string(),
 });
 
-router.post("/", async (req, res) => {
+router.post("/signin", async (req, res) => {
   try {
     const { success, error } = signinBody.safeParse(req.body);
-    console.log("validation result:", success, error);
+    // console.log("validation result:", success, error);
     if (!success) {
       return res.status(400).json({ message: "Input invalid" });
     }
