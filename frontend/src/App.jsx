@@ -5,6 +5,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Protected from "./components/Protected";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
@@ -17,8 +18,12 @@ function App() {
             path="/dashboard"
             element={<Protected Component={Dashboard} />}
           />
-          <Route path="send" element={<Sendmoney />} />
-          <Route path="paymentsuccess" element={<PaymentSuccess />} />
+          <Route path="/send" element={<Protected Component={Sendmoney} />} />
+          <Route
+            path="/paymentsuccess"
+            element={<Protected Component={PaymentSuccess} />}
+          />
+          <Route path="/transactions" element={<Transactions />} />
         </Routes>
       </BrowserRouter>
     </>

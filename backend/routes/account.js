@@ -86,6 +86,7 @@ router.post("/transfer", authMiddleware, async (req, res) => {
       await session.abortTransaction();
       return res.json({ message: "User not found" });
     }
+
     //perform the transfer
     await Account.updateOne(
       { userId: req.userId },
@@ -97,13 +98,6 @@ router.post("/transfer", authMiddleware, async (req, res) => {
     ).session(session);
 
     //save the transaction
-
-    // const transaction = await Transaction.create({
-    //   senderId: account,
-    //   recieverId: toAccount,
-    //   amount,
-    // }).session(session);
-
     const transaction = new Transaction({
       senderId: req.userId,
       receiverId: to,
@@ -130,9 +124,13 @@ router.get("/transactions", authMiddleware, async (req, res) => {
 
     //find transactions where current user is either sender or reciever
     const transactions = await Transaction.find({
-      $or: [{ senderId: req.userId }, { recieverId: req.userId }],
+      $or: [{ senderId: req.userId }, { receiverId: req.userId }],
     }).populate("senderId receiverId", "username firstName lastName");
 
+    if (!transactions || transactions.length === 0) {
+      // console.log("no transactions");
+      return res.json({ transactions: [] });
+    }
     res.json({ transactions });
   } catch (error) {
     console.error("Error fetching trnasactions:", error);

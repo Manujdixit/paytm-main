@@ -6,7 +6,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-console.log("BASE_URL", BASE_URL);
 
 const Dashboard = () => {
   const [balance, setbalance] = useState(0);

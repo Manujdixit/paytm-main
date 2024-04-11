@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -9,8 +10,17 @@ export const Users = () => {
   // Replace with backend call
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
+  const [userId, setUserId] = useState(""); // State to store userId
 
   useEffect(() => {
+    //decode token to extract userId
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const userIdFromToken = decodedToken.userId;
+      setUserId(userIdFromToken);
+    }
+
     console.log("Fetching users with filter:", filter);
     axios
       .get(`${BASE_URL}/user/bulk?filter=` + filter)
@@ -45,7 +55,20 @@ export const Users = () => {
         ></input>
       </div>
       <div>
-        {users && users.map((user) => <User user={user} key={user._id} />)}
+        {users &&
+          users.map((user) => {
+            // Check if the user id matches the token user id
+            if (user._id !== userId) {
+              return (
+                <User
+                  user={user}
+                  key={user._id}
+                  // navigate={navigate}
+                />
+              );
+            }
+            return null; // Skip rendering the user if it matches the token user id
+          })}
       </div>
     </>
   );

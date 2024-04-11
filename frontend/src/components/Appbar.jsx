@@ -19,12 +19,14 @@ export const Appbar = () => {
   };
 
   return (
-    <div className="shadow h-14 flex justify-between">
-      <div className="flex flex-col justify-center h-full ml-4">
+    <div className="shadow h-14 flex justify-between px-4 py-8">
+      <div className="flex flex-col justify-center h-full ml-4 font-semibold text-xl">
         <a href="/dashboard">Payzz app</a>
       </div>
-      <div className="flex">
-        <div className="flex flex-col justify-center h-full mr-4">Hello</div>
+      <div className="flex items-center">
+        <div className="flex flex-col justify-center h-full mr-4 items-center">
+          Hello
+        </div>
         <button
           className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mt-1 mr-2"
           onClick={toggleDropdown}
@@ -32,7 +34,14 @@ export const Appbar = () => {
           <div className="text-xl">U</div>
         </button>
         {dropdownVisible && (
-          <div className="absolute right-0 mt-14 bg-white border rounded-lg shadow-lg">
+          <div className="absolute  right-4   mt-48 bg-white border rounded-lg shadow-lg">
+            <button className="block w-full py-2 px-4 text-left border-t">
+              <a href="/profile">Profile</a>
+            </button>
+            <button className="block w-full py-2 px-4 text-left border-t">
+              <a href="/transactions">Transactions</a>
+            </button>
+
             <button
               className="block w-full py-2 px-4 text-left border-t"
               onClick={handleLogoutClick}
