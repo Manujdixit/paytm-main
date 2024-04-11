@@ -40,8 +40,8 @@ const Transactions = () => {
   return (
     <div>
       <Appbar />
-      <div className="w-full  bg-slate-300 p-20">
-        <div className="w-full bg-slate-100 p-10 rounded-lg">
+      <div className="w-full min-h-screen  bg-slate-300 p-20">
+        <div className="w-full bg-slate-100 min-h-screen p-10 rounded-lg">
           <h1 className="text-3xl underline underline-offset-1 mb-8">
             Transactions
           </h1>

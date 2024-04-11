@@ -33,7 +33,7 @@ const Dashboard = () => {
   return (
     <div>
       <Appbar />
-      <div className="m-8">
+      <div className="p-8 bg-slate-300 min-h-screen">
         <Balance value={balance} />
         <Users />
       </div>
