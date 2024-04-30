@@ -2,10 +2,15 @@ const express = require("express");
 const mainRouter = require("./routes/index");
 const app = express();
 const db = require("./db");
+const cron = require("node-cron");
 
 const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
+
+cron.schedule("*/14 * * * *", function () {
+  console.log("cron prformed");
+});
 
 app.use(cors());
 app.use(express.json());
